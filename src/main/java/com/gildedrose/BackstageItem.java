@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class BackstageItem extends CustomItem {
+public class BackstageItem extends AgedFineItem {
     public BackstageItem(Item item) {
         super(item);
     }

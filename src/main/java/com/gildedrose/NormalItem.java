@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class NormalItem extends CustomItem {
+public class NormalItem extends AgedBadlyItem {
     public NormalItem(Item item) {
         super(item);
     }

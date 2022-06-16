@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class ConjuredItem extends CustomItem {
+public class ConjuredItem extends AgedBadlyItem {
 
     public ConjuredItem(Item item) {
         super(item);

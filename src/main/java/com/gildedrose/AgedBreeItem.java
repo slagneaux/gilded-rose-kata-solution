@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class AgedBreeItem extends CustomItem{
+public class AgedBreeItem extends AgedFineItem{
 
     public AgedBreeItem(Item item) {
         super(item);
