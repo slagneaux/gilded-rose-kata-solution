@@ -3,6 +3,7 @@ package com.gildedrose;
 import org.junit.jupiter.api.Test;
 
 import static com.gildedrose.GildedRose.*;
+import static com.gildedrose.GildedRose.CONJURED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
@@ -31,6 +32,42 @@ class GildedRoseTest {
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(23, app.items[0].quality);
+    }
+
+
+    @Test
+    void downgradeQualityConjuredItem_shouldDoubleDowngrade() {
+        Item[] items = new Item[] { new Item(CONJURED, 10, 25) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(23, app.items[0].quality);
+        assertEquals(9, app.items[0].sellIn);
+    }
+
+    @Test
+    void downgradeQualityConjuredItem_shouldBe0() {
+        Item[] items = new Item[] { new Item(CONJURED, 10, 1) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(0, app.items[0].quality);
+        assertEquals(9, app.items[0].sellIn);
+    }
+
+    @Test
+    void downgradeNegativeQualityConjuredItem_shouldntDowngrade() {
+        Item[] items = new Item[] { new Item(CONJURED, 10, 0) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(0, app.items[0].quality);
+        assertEquals(9, app.items[0].sellIn);
+    }
+
+    @Test
+    void downgradeQualityConjuredItemAfterPeremption_shouldFourTimesDowngrade() {
+        Item[] items = new Item[] { new Item(CONJURED, -1, 25) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(21, app.items[0].quality);
     }
 
     @Test

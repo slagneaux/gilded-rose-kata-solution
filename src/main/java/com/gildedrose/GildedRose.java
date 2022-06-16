@@ -4,6 +4,7 @@ class GildedRose {
     public static final String AGED_BRIE = "Aged Brie";
     public static final String BACKSTAGE_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    public static final String CONJURED = "Conjured Mana Cake";
     public static final int MAX_QUALITY = 50;
     public static final int MIN_QUALITY = 0;
     Item[] items;
@@ -30,6 +31,11 @@ class GildedRose {
                 updateQualityBackstageConcert(item);
                 continue;
             }
+
+            if (item.name.equals(CONJURED)) {
+                updateQualityConjuredItem(item);
+                continue;
+            }
             if (item.quality > MIN_QUALITY) {
                 updateQualityNormalItem(item);
             }
@@ -42,6 +48,21 @@ class GildedRose {
             if (item.sellIn < 0 && item.quality < MAX_QUALITY) {
                 item.quality = item.quality + 1;
             }
+        }
+    }
+
+    private void updateQualityConjuredItem(Item item) {
+        if (item.quality > MIN_QUALITY + 1) {
+            item.quality = item.quality - 2;
+            if (isItemAfterPeremption(item)) {
+                if (item.quality > MIN_QUALITY + 1) {
+                    item.quality = item.quality - 2;
+                } else {
+                    item.quality = 0;
+                }
+            }
+        } else {
+            item.quality = 0;
         }
     }
 
